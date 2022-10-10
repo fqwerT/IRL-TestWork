@@ -1,0 +1,49 @@
+.input {
+    height: 40px;
+    border-radius: 12px;
+    width: 100px;
+    padding: 4px;
+    background-color: black;
+    color: azure;
+
+    &__box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        column-gap: 10px;
+    }
+
+    &__error {
+        color: red;
+        font-family: 'Roboto';
+        margin: 10px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        font-size: 18px;
+    }
+
+    &__btn {
+        width: 120px;
+        height: 30px;
+        margin-top: 30px;
+        background-color: black;
+        font-family: 'Roboto';
+        font-size: 15px;
+        letter-spacing: 1px;
+        color: white;
+        font-weight: 600px;
+        border-radius: 10px;
+        text-transform: uppercase;
+
+        &:hover {
+            -webkit-box-shadow: 1px 0px 11px 4px rgba(76, 173, 247, 0.62);
+            -moz-box-shadow: 1px 0px 11px 4px rgba(76, 173, 247, 0.62);
+            box-shadow: 1px 0px 11px 4px rgba(76, 173, 247, 0.62);
+            transform: scale(1.2);
+        }
+    }
+
+
+
+}

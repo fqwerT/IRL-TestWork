@@ -1,0 +1,52 @@
+.items {
+    display: flex;
+    flex-direction: column;
+    &__container {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        border-radius: 7px;
+        -webkit-box-shadow: 4px 4px 8px 6px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 4px 4px 8px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 4px 4px 8px 6px rgba(0, 0, 0, 0.2);
+        padding: 5px;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    &__heading {
+        font-weight: 500;
+        font-family: 'Roboto';
+        text-transform: uppercase;
+
+    }
+
+    &__paragraph {
+        white-space: pre;
+        font-family: 'Roboto';
+        text-transform: uppercase;
+
+    }
+
+    &__btn {
+
+        width: 50px;
+        border-radius: 10px;
+        background-color: white;
+        color: black;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+        font-size: 15px;
+        font-family: 'Roboto';
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: black
+    }
+
+}

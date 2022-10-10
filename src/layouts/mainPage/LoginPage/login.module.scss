@@ -1,0 +1,24 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    &__heading {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: 'Roboto';
+    }
+
+    &__paragraph {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: 'Roboto';
+    }
+
+    &__link  {
+        text-decoration: none;
+        color: orange;
+    }
+}

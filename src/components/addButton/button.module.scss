@@ -1,0 +1,81 @@
+$color: #0cf;
+
+.button {
+  display: inline-block;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  text-decoration: none;
+  margin: 10px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color;
+    border-radius: 10rem;
+    z-index: -2;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: darken($color, 15%);
+    transition: all .3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #fff;
+
+    &:before {
+      width: 100%;
+    }
+  }
+
+  &__openContainer {
+    background: rgba(0, 0, 0, 0.8);
+    height: 260vh;
+    width: 99vw;
+    position: fixed;
+    top: 0;
+  }
+
+
+  &__inputBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    height: 10%;
+  }
+
+  &__inputs {
+    margin: 15px;
+    height: 30px;
+    border-radius: 12px;
+    padding-left: 10px;
+
+    &::placeholder {
+      font-family: 'Roboto';
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
+}
