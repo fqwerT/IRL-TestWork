@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/IRL-TestWork/static/css/main.a1257120.css",
+    "main.js": "/IRL-TestWork/static/js/main.d38d81f6.js",
+    "static/js/787.b9e58dad.chunk.js": "/IRL-TestWork/static/js/787.b9e58dad.chunk.js",
+    "index.html": "/IRL-TestWork/index.html",
+    "main.a1257120.css.map": "/IRL-TestWork/static/css/main.a1257120.css.map",
+    "main.d38d81f6.js.map": "/IRL-TestWork/static/js/main.d38d81f6.js.map",
+    "787.b9e58dad.chunk.js.map": "/IRL-TestWork/static/js/787.b9e58dad.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a1257120.css",
+    "static/js/main.d38d81f6.js"
+  ]
+}
