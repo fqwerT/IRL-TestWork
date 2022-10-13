@@ -3,8 +3,9 @@ import { NavLink } from "react-router-dom";
 import style from "./items.module.scss";
 import Axios from "axios";
 import { AddButton } from "components/addButton/addBtn";
+import { WithAuthUser } from "hocs/WithUser";
 
-export const Items = () => {
+ const Items = () => {
   const [items, setItems] = useState([]);
   const [heading, setHeading] = useState("");
   const [text, setText] = useState("");
@@ -48,8 +49,11 @@ export const Items = () => {
         open={open}
         setOpen={setOpen}
       />
+      <div className={style.items__Box}>
       {items.map((item) => (
+        
         <div className={style.items__container} key={item.Id}>
+          
           <h1 className={style.items__heading}>{item.title}</h1>
           <NavLink
             className={style.items__link}
@@ -65,8 +69,13 @@ export const Items = () => {
           >
             &times;
           </button>
-        </div>
+          </div>
+       
       ))}
+       </div>
     </div>
   );
 };
+
+
+export const AuthUserItems = WithAuthUser(Items)

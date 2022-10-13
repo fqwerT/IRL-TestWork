@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Forms } from "./Forms";
+import  {Forms}  from "./Forms";
 import { setUser } from "store/slices/userSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ export const SignUp = () => {
             token: user.accessToken,
           })
         );
-        navigate("/");
+        navigate("/HomePage");
       })
       .catch(console.error);
   };

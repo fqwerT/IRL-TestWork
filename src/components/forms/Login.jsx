@@ -18,7 +18,7 @@ export const Login = () => {
                     id: user.uid,
                     token: user.accessToken,
                 }));
-                navigate('/home');
+                navigate('/HomePage');
             })
             .catch(() => alert('Invalid user!'))
     }

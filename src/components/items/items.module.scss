@@ -1,6 +1,7 @@
 .items {
     display: flex;
     flex-direction: column;
+
     &__container {
         display: flex;
         flex-direction: column;
@@ -15,18 +16,21 @@
 
     }
 
+    &__Box {
+        height: 85vh;
+        overflow-y: scroll;
+    }
+
     &__heading {
         font-weight: 500;
         font-family: 'Roboto';
         text-transform: uppercase;
-
     }
 
     &__paragraph {
         white-space: pre;
         font-family: 'Roboto';
         text-transform: uppercase;
-
     }
 
     &__btn {
@@ -35,6 +39,7 @@
         border-radius: 10px;
         background-color: white;
         color: black;
+
         &:hover {
             transform: scale(1.2);
         }
@@ -48,5 +53,4 @@
         letter-spacing: 1px;
         color: black
     }
-
 }

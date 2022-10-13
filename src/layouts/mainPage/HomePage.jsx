@@ -2,16 +2,18 @@ import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAuth } from "hooks/useAuth";
 import { removeUser } from "store/slices/userSlice";
-import { Items } from "components/items/Items";
+import { AuthUserItems } from "components/items/Items";
 
-export const HomePage = () => {
+
+
+ export const HomePage = () => {
   const dispatch = useDispatch();
   const { isAuth, email } = useAuth();
 
 
   return isAuth ? (
     <div>
-      <Items/>
+      <AuthUserItems/>
       <button onClick={() => dispatch(removeUser())}>
         Log out from {email}
       </button>
@@ -23,3 +25,4 @@ export const HomePage = () => {
     </div>
   );
 };
+

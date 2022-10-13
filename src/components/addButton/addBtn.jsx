@@ -75,15 +75,20 @@ export const AddButton = ({ PostData, setText, setHeading, open, setOpen }) => {
               onInput={HandlerText}
               placeholder="Text?"
             />
-            <button className={style.button} disabled={!formValid} onClick={(e) => PostData(e)}>
+            <button
+              className={style.button}
+              disabled={!formValid}
+              onClick={(e) => PostData(e)}
+            >
               Save
             </button>
+        
           </div>
         </div>
       ) : (
-        <a href="#123" className={style.button} onClick={(e) => setOpen(!open)}>
+        <button className={style.button} onClick={(e) => setOpen(!open)}>
           Add post
-        </a>
+        </button>
       )}
     </div>
   );

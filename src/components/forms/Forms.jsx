@@ -1,99 +1,126 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./forms.module.scss";
 
 export const Forms = ({ title, handleClick }) => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [emailDirty, setEmailDirty] = useState(false);
-  const [passDirty, setPasslDirty] = useState(false);
-  const [emailErrror, setEmaillError] = useState(
-    "поле email не может быть пустым!"
-  );
-  const [passErrror, setPasslError] = useState(
-    "поле пароль не может быть пустым!"
-  );
+  const [form, setForm] = useState({
+    email: {
+      value: "",
+      isDirty: false,
+      error: "some email error",
+    },
+    password: {
+      value: "",
+      isDirty: false,
+      error: "some password error",
+    },
+  });
 
   const [formValid, setFormValid] = useState(false);
 
   const BlurHahdler = (e) => {
     switch (e.target.name) {
       case "email":
-        setEmailDirty(true);
+        setForm((previous) => ({
+          ...previous,
+          error: (form.email.isDirty = true),
+        }));
         break;
-      case "pass":
-        setPasslDirty(true);
+      case "password":
+        setForm((previous) => ({
+          ...previous,
+          error: (form.password.isDirty = true),
+        }));
         break;
     }
   };
 
   const EmailHandler = (e) => {
-    setEmail(e.target.value);
+    setForm((previous) => ({
+      ...previous,
+      error: (form.email.value = e.target.value),
+    }));
     const re =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (!re.test(String(e.target.value).toLowerCase())) {
-      setEmaillError("Некорректный email!");
+      setForm((previous) => ({
+        ...previous,
+        error: (form.email.error = "недопустимые символы в поле EMAIL"),
+      }));
     } else {
-      setEmaillError("");
+      setForm((previous) => ({
+        ...previous,
+        error: (form.email.error = false),
+      }));
+    }
+  };
+
+  const PasswordHandler = (e) => {
+    setForm((previous) => ({
+      ...previous,
+      error: (form.password.value = e.target.value.trim()),
+    }));
+    if (e.target.value < 6) {
+      setForm((previous) => ({
+        ...previous,
+        error: (form.password.error =
+          "поле пароль не может иметь меньше 6 символов!"),
+      }));
+      if (!e.target.value) {
+        setForm((previous) => ({
+          ...previous,
+          error: (form.password.error = "поле пароль не может быть пустым!"),
+        }));
+      }
+    } else {
+      setForm((previous) => ({
+        ...previous,
+        error: (form.password.error = false),
+      }));
     }
   };
 
   useEffect(() => {
-    if (emailErrror || passErrror) {
+    if (form.email.error || form.password.error) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [emailErrror, passErrror]);
-
-  const PasswordHandler = (e) => {
-    setPass(e.target.value);
-    if (e.target.value.length < 6) {
-      setPasslError("В пароле должно быть не меньше 6 символов!");
-      if (!e.target.value) {
-        setPasslError("поле пароль не может быть пустым!");
-      }
-    } else {
-      setPasslError("");
-    }
-  };
+  }, [form.email.error, form.password.error]);
 
   return (
     <>
       <div className={style.input__box}>
         <input
           className={style.input}
-          onBlur={(e) => BlurHahdler(e)}
+          onBlur={BlurHahdler}
           type="email"
-          value={email}
-          onChange={(e) => EmailHandler(e)}
+          value={form.email.value}
+          onChange={EmailHandler}
           placeholder="email"
-          autoComplete="off"
           name="email"
         />
         <input
           className={style.input}
-          onBlur={(e) => BlurHahdler(e)}
+          onBlur={BlurHahdler}
           type="password"
-          value={pass}
-          onChange={(e) => PasswordHandler(e)}
+          value={form.password.value}
+          onChange={PasswordHandler}
           placeholder="password"
-          autoComplete="off"
-          name="pass"
+          name="password"
         />
       </div>
       <button
         disabled={!formValid}
-        onClick={() => handleClick(email, pass)}
+        onClick={() => handleClick(form.email.value, form.password.value)}
         className={style.input__btn}
       >
         {title}
       </button>
-      {emailDirty && emailErrror && (
-        <div className={style.input__error}>{emailErrror}</div>
+      {form.email.isDirty && form.email.error && (
+        <div className={style.input__error}>{form.email.error}</div>
       )}
-      {passDirty && passErrror && (
-        <div className={style.input__error}>{passErrror}</div>
+      {form.password.isDirty && form.password.error && (
+        <div className={style.input__error}>{form.password.error}</div>
       )}
     </>
   );
