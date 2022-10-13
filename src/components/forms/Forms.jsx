@@ -17,6 +17,38 @@ export const Forms = ({ title, handleClick }) => {
 
   const [formValid, setFormValid] = useState(false);
 
+  const checkEmailError = (value) => {
+    // тут уже проверки value, сетать значения не надо, ты просто if-ами проверяешь значение и в зависимости от этого возвращаешь текст ошибки
+    return 'текст ошибки'
+  }
+  const checkPasswordError = (value) => {
+    // тут уже проверки value, сетать значения не надо, ты просто if-ами проверяешь значение и в зависимости от этого возвращаешь текст ошибки
+    return 'текст ошибки'
+  }
+
+  const checkError = (name, value) => {
+    switch (name) {
+      case 'email':
+        return checkEmailError(value);
+      case 'password':
+        return checkPasswordError(value);
+      default:
+        return '';
+    }
+  }
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setForm(prev => ({
+      ...prev,
+      [name]: {
+        ...prev[name],
+        value,
+        error: checkError(name, value)
+      }
+    }))
+  }
+
   const BlurHahdler = (e) => {
     switch (e.target.name) {
       case "email":
@@ -95,7 +127,7 @@ export const Forms = ({ title, handleClick }) => {
           onBlur={BlurHahdler}
           type="email"
           value={form.email.value}
-          onChange={EmailHandler}
+          onChange={handleChange}
           placeholder="email"
           name="email"
         />
@@ -104,7 +136,7 @@ export const Forms = ({ title, handleClick }) => {
           onBlur={BlurHahdler}
           type="password"
           value={form.password.value}
-          onChange={PasswordHandler}
+          onChange={handleChange}
           placeholder="password"
           name="password"
         />
