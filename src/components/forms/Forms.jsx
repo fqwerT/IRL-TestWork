@@ -17,65 +17,73 @@ export const Forms = ({ title, handleClick }) => {
 
   const [formValid, setFormValid] = useState(false);
 
-  const BlurHahdler = (e) => {
-    switch (e.target.name) {
+  const checkEmailError = (value) => {
+    const re =
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (!re.test(String(value).toLowerCase())) {
+      return "Недопустимые символы для поля EMAIL!";
+    }
+  };
+  const checkPasswordError = (value) => {
+    if (value.length <= 6) {
+      return "Длинна поля ПАРОЛЬ должна быть не меньше 6 символов!";
+    }
+
+    if (!value) {
+      return "Поле ПАРОЛЬ не может быть пустым!";
+    }
+
+    if (value.charAt(0) === " ") {
+      return "В поле Пароль нельзя использовать ПРОБЕЛ!";
+    }
+  };
+
+  const checkError = (name, value) => {
+    switch (name) {
       case "email":
-        setForm((previous) => ({
-          ...previous,
-          error: (form.email.isDirty = true),
+        return checkEmailError(value);
+      case "password":
+        return checkPasswordError(value);
+      default:
+        return "";
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: {
+        ...prev[name],
+        value,
+        error: checkError(name, value),
+      },
+    }));
+    console.log(form);
+  };
+
+  const BlurHahdler = (e) => {
+    const { name } = e.target;
+    switch (name) {
+      case "email":
+        setForm((prev) => ({
+          ...prev,
+          [name]: {
+            ...prev[name],
+            isDirty: (form.email.isDirty = true),
+          },
         }));
         break;
       case "password":
-        setForm((previous) => ({
-          ...previous,
-          error: (form.password.isDirty = true),
+        setForm((prev) => ({
+          ...prev,
+          [name]: {
+            ...prev[name],
+            isDirty: (form.email.isDirty = true),
+          },
         }));
+        console.log(form, form.email.isDirty);
         break;
-    }
-  };
-
-  const EmailHandler = (e) => {
-    setForm((previous) => ({
-      ...previous,
-      error: (form.email.value = e.target.value),
-    }));
-    const re =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setForm((previous) => ({
-        ...previous,
-        error: (form.email.error = "недопустимые символы в поле EMAIL"),
-      }));
-    } else {
-      setForm((previous) => ({
-        ...previous,
-        error: (form.email.error = false),
-      }));
-    }
-  };
-
-  const PasswordHandler = (e) => {
-    setForm((previous) => ({
-      ...previous,
-      error: (form.password.value = e.target.value.trim()),
-    }));
-    if (e.target.value < 6) {
-      setForm((previous) => ({
-        ...previous,
-        error: (form.password.error =
-          "поле пароль не может иметь меньше 6 символов!"),
-      }));
-      if (!e.target.value) {
-        setForm((previous) => ({
-          ...previous,
-          error: (form.password.error = "поле пароль не может быть пустым!"),
-        }));
-      }
-    } else {
-      setForm((previous) => ({
-        ...previous,
-        error: (form.password.error = false),
-      }));
     }
   };
 
@@ -92,19 +100,19 @@ export const Forms = ({ title, handleClick }) => {
       <div className={style.input__box}>
         <input
           className={style.input}
-          onBlur={BlurHahdler}
           type="email"
           value={form.email.value}
-          onChange={EmailHandler}
+          onBlur={BlurHahdler}
+          onChange={handleChange}
           placeholder="email"
           name="email"
         />
         <input
           className={style.input}
-          onBlur={BlurHahdler}
           type="password"
           value={form.password.value}
-          onChange={PasswordHandler}
+          onChange={handleChange}
+          onBlur={BlurHahdler}
           placeholder="password"
           name="password"
         />
