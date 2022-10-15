@@ -1,28 +1,20 @@
-import { Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useAuth } from "hooks/useAuth";
-import { removeUser } from "store/slices/userSlice";
 import { AuthUserItems } from "components/items/Items";
+import { WithAuthUser } from "hocs/WithUser";
+import { useNavigate } from "react-router-dom";
 
+const HomePage = () => {
+  const navigate = useNavigate();
+  const HandleLogOut = () => {
+    window.localStorage.clear("EMAIL");
+    navigate("/loginPage");
+  };
 
-
- export const HomePage = () => {
-  const dispatch = useDispatch();
-  const { isAuth, email } = useAuth();
-
-
-  return isAuth ? (
+  return (
     <div>
-      <AuthUserItems/>
-      <button onClick={() => dispatch(removeUser())}>
-        Log out from {email}
-      </button>
-    </div>
-  ) : (
-    <div>
-      <h1>Home</h1>
-      <Navigate to="/loginPage" />
+      <AuthUserItems />
+      <button onClick={HandleLogOut}>Log out</button>
     </div>
   );
 };
 
+export const AuthHomePage = WithAuthUser(HomePage);
