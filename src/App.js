@@ -6,6 +6,7 @@ import { LoginPage } from "layouts/mainPage/LoginPage/LoginPage";
 import { CurrentCard } from "layouts/cardPage/CurrentCard";
 import { AuthHomePage } from "layouts/mainPage/HomePage";
 
+
 function App() {
   return (
     <div className="App">
@@ -20,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default App ;

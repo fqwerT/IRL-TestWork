@@ -1,12 +1,19 @@
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Forms } from "./Forms";
-import { setUser } from "store/slices/userSlice";
+import { useStore } from "context";
+import { setAuthUser } from "context";
 
 export const Login = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {
+    dispatch,
+    state = {
+      email: " ",
+      token: " ",
+      id: " ",
+    },
+  } = useStore();
 
   const handleLogin = (email, password) => {
     const auth = getAuth();
@@ -14,7 +21,7 @@ export const Login = () => {
       .then(({ user }) => {
         console.log(user);
         dispatch(
-          setUser({
+          setAuthUser({
             email: user.email,
             id: user.uid,
             token: user.accessToken,

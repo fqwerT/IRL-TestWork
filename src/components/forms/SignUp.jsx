@@ -1,12 +1,14 @@
-import { useDispatch } from "react-redux";
-import  {Forms}  from "./Forms";
-import { setUser } from "store/slices/userSlice";
+import { Forms } from "./Forms";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "context";
 
 export const SignUp = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {
+    state: { setAuthUser },
+    dispatch,
+  } = useStore();
 
   const auth = getAuth();
 
@@ -16,7 +18,7 @@ export const SignUp = () => {
       .then(({ user }) => {
         console.log(user);
         dispatch(
-          setUser({
+          setAuthUser({
             email: user.email,
             id: user.uid,
             token: user.accessToken,
